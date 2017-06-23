@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
+const marked = require('marked');
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <header>
+          <h1>Gilbert's Markdown Previewer</h1>
+        </header>
+        
+        <main>
+          <textarea id="markdown" ></textarea>
+          <div id="preview"></div>
+        </main>
+
       </div>
     );
   }
 }
+
+console.log(marked('I am using __markdown__.'));
 
 export default App;
