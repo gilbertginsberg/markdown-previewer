@@ -1,19 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
 .App {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+h1 {
+    text-align: center;
+}
+
 main {
     width: 100%;
+    height: 750px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #markdown {
-    width: 25%;
+    width: 45%;
+    height: 100%;
+    margin-left: 2%;
 }
 
 #preview {
+    width: 45%;
+    height: 100%;
     border: 1px solid black;
+    margin-right: 2%;
 }
