@@ -15,7 +15,7 @@ body {
     align-items: center;
 }
 
-h1 {
+header h1 {
     text-align: center;
 }
 
@@ -26,10 +26,11 @@ main {
     justify-content: space-between;
 }
 
-#markdown, #preview {
+#markdown, #preview-container {
     width: 45%;
     height: 100%;
     border: 5px solid black;
+    padding: 5px;
 }
 
 #markdown {
@@ -37,6 +38,6 @@ main {
     font-size: 150%;
 }
 
-#preview {
+#preview-container {
     margin-right: 2%;
 }
