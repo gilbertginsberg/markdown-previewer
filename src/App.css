@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+
 .App {
     display: flex;
     flex-direction: column;
@@ -19,15 +26,17 @@ main {
     justify-content: space-between;
 }
 
-#markdown {
+#markdown, #preview {
     width: 45%;
     height: 100%;
-    margin-left: 2%;
+    border: 5px solid black;
+}
+
+#markdown {
+    margin-left: 2%; 
+    font-size: 150%;
 }
 
 #preview {
-    width: 45%;
-    height: 100%;
-    border: 1px solid black;
     margin-right: 2%;
 }
