@@ -9,7 +9,7 @@ marked.setOptions({
 
 function Markdown(props) {
   return (
-    <textarea id="markdown" value={props.value} onChange={props.onChange} onLoad={() => props.onLoad}>
+    <textarea id="markdown" value={props.value} onChange={props.onChange}>
  
     </textarea>
   );
@@ -39,7 +39,6 @@ class Type extends React.Component {
   renderPreview(markdown) {
     const preview = document.getElementById('preview');
     const firstChild = preview.firstChild;
-    console.log(firstChild);
     const html = document.createRange().createContextualFragment(markdown);
 
     const div = document.createElement('div');
