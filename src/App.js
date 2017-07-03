@@ -9,7 +9,8 @@ marked.setOptions({
 
 function Markdown(props) {
   return (
-    <textarea id="markdown" onInput={props.onInput}>
+    <textarea id="markdown" value={props.value} onChange={props.onChange} onLoad={() => props.onLoad}>
+ 
     </textarea>
   );
 }
@@ -17,8 +18,8 @@ function Markdown(props) {
 function Preview(props) {
   
   return (
-    <div id="preview-container">
-      <div id="preview">
+    <div id="preview">
+      <div>
 
       </div>
     </div>
@@ -29,31 +30,40 @@ class Type extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      html: '',
+      value: 'Hola \n===\n \n* Un mango \n* Dos bananas \n* Tres arepas\n \n### Almond butter\n \n**Be bold.**\n \n*crazy run*\n \n`code everyday`',
+      html: '', 
     };
     this.handleMarkdown = this.handleMarkdown.bind(this);
   }
 
+
     renderPreview(markdown) {
-      const previewContainer = document.getElementById('preview-container');
       const preview = document.getElementById('preview');
-      const firstChild = previewContainer.firstChild;
+      const firstChild = preview.firstChild;
+      console.log(firstChild);
       const html = document.createRange().createContextualFragment(markdown);
 
-      if (preview) {
-        const div = document.createElement('div');
-        div.appendChild(html);
-        previewContainer.replaceChild(div, preview);
-      } else {
-        const div = document.createElement('div');
-        div.appendChild(html);
-        previewContainer.replaceChild(div, firstChild);
-      }
+      const div = document.createElement('div');
+      div.appendChild(html);
+      preview.replaceChild(div, firstChild);
     }
 
+    componentDidMount() {
+      const text = this.state.value.slice();
+      let md = '';
+
+      marked(text, function (err, content) {
+        if (err) {
+          throw err;
+        } 
+        md = content; 
+      });
+      this.renderPreview(md);
+    }
+   
     handleMarkdown(e) {
-      const text = e.target.value;
-      let html = this.state.html.slice;
+      let text = e.target.value;
+      let html = this.state.html.slice();
 
       marked(text, function (err, content) {
         if (err) {
@@ -63,13 +73,14 @@ class Type extends React.Component {
       });
       this.setState({
           html: html,
+          value: e.target.value,
         }, () => this.renderPreview(this.state.html)); 
     }
 
   render() {
     return (
       <main>
-        <Markdown onInput={this.handleMarkdown}/>
+        <Markdown onChange={this.handleMarkdown} value={this.state.value} />
         <Preview showHTML={this.state.html}/>
       </main>
     );
