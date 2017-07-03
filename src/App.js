@@ -94,6 +94,7 @@ class App extends React.Component {
           <h1>Gilbert's Markdown Previewer</h1>
         </header>
         <Type />
+        <footer>By <a href="https://twitter.com/gilbertginsberg">Gilbert</a></footer>
       </div>
     );
   }
