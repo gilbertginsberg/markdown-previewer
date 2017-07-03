@@ -36,46 +36,45 @@ class Type extends React.Component {
     this.handleMarkdown = this.handleMarkdown.bind(this);
   }
 
+  renderPreview(markdown) {
+    const preview = document.getElementById('preview');
+    const firstChild = preview.firstChild;
+    console.log(firstChild);
+    const html = document.createRange().createContextualFragment(markdown);
 
-    renderPreview(markdown) {
-      const preview = document.getElementById('preview');
-      const firstChild = preview.firstChild;
-      console.log(firstChild);
-      const html = document.createRange().createContextualFragment(markdown);
+    const div = document.createElement('div');
+    div.appendChild(html);
+    preview.replaceChild(div, firstChild);
+  }
 
-      const div = document.createElement('div');
-      div.appendChild(html);
-      preview.replaceChild(div, firstChild);
-    }
+  componentDidMount() {
+    const text = this.state.value.slice();
+    let md = '';
 
-    componentDidMount() {
-      const text = this.state.value.slice();
-      let md = '';
-
-      marked(text, function (err, content) {
-        if (err) {
-          throw err;
-        } 
-        md = content; 
-      });
-      this.renderPreview(md);
-    }
+    marked(text, function (err, content) {
+      if (err) {
+        throw err;
+      } 
+      md = content; 
+    });
+    this.renderPreview(md);
+  }
    
-    handleMarkdown(e) {
-      let text = e.target.value;
-      let html = this.state.html.slice();
+  handleMarkdown(e) {
+    let text = e.target.value;
+    let html = this.state.html.slice();
 
-      marked(text, function (err, content) {
-        if (err) {
-          throw err;
-        } 
-        html = content;
-      });
-      this.setState({
-          html: html,
-          value: e.target.value,
-        }, () => this.renderPreview(this.state.html)); 
-    }
+    marked(text, function (err, content) {
+      if (err) {
+        throw err;
+      } 
+      html = content;
+    });
+    this.setState({
+        html: html,
+        value: e.target.value,
+      }, () => this.renderPreview(this.state.html)); 
+  }
 
   render() {
     return (
